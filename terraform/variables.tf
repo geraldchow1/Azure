@@ -18,3 +18,9 @@ variable "sa_name" {
 }
 
 
+variable "account_tier" {
+  type = string
+  # sensitive = true
+  default = ""
+}
+
