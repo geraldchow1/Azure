@@ -33,7 +33,7 @@ stages:
     jobs:
     - deployment: ApplyJob
       displayName: Apply Terraform after Validation
-      environment: {{ parameters.Env }}
+      environment: poc
       strategy:
         runOnce:
           deploy:
