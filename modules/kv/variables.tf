@@ -28,7 +28,3 @@ variable "sku" {
   default     = ""
 }
 
-variable "tags" {
-  type = map
-}
-

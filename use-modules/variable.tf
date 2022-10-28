@@ -13,7 +13,3 @@ variable "rgs" {
   default     = {}
 }
 
-variable "tags" {
-  type = map
-}
-

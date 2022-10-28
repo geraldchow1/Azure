@@ -1,0 +1,25 @@
+
+trigger: none
+
+parameters:
+  - name: Env
+    values:
+      - poc
+      - dev
+      - prod
+
+variables:
+- group: terraform
+
+steps:
+
+- bash: |
+    export ARM_CLIENT_ID=$(TF_CLIENT_ID)
+    export ARM_CLIENT_SECRET=$(TF_CLIENT_SECRET)
+    export ARM_SUBSCRIPTION_ID=$(TF_SUBSCRIPTION_ID)
+    export ARM_TENANT_ID=$(TF_TENANT_ID)
+    cd use-modules
+    terraform init
+    terraform validate
+    terraform plan -var-file=../variables/${{ parameters.Env }}.tfvars
+  workingDirectory: $(Build.SourcesDirectory)
