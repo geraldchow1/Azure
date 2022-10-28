@@ -21,5 +21,6 @@ module "key_vault" {
   rg         = lookup(each.value, "rg_name", null)
   location   = lookup(each.value, "location", null)
   sku        = lookup(each.value, "sku", "standard")
-  tags       = lookup(each.value, "tags", null)
+  # tags       = lookup(each.value, "tags", null)
+  tags = var.tags
 }

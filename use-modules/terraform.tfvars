@@ -9,9 +9,6 @@ key_vaults = {
     rg_name  = "rg-uat-tf-core"
     location = "canadacentral"
     sku      = "standard"
-    tags = {
-      "env" = "UAT"
-    }
   }
 }
 
@@ -27,3 +24,6 @@ rgs = {
   }
 }
 
+tags = {
+  "env" = "PROD"
+}
