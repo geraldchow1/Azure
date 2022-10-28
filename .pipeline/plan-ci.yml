@@ -9,7 +9,7 @@ parameters:
       - prod
 
 variables:
-- group: terraform
+- group: terraform-${{ parameters.Env }}
 
 steps:
 
