@@ -1,8 +1,12 @@
 
+
 trigger: 
   branches:
       include:
         - main
+  paths:
+      include:
+        - use-modules
 
 
 parameters:
