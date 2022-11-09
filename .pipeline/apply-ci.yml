@@ -5,15 +5,16 @@ trigger:
         - main
 
 
-# parameters:
-#   - name: Env
-#     values:
-#       - poc
-#       - dev
-#       - prod
+parameters:
+  - name: Env
+    default: poc
+    values:
+      - poc
+      - dev
+      - prod
 
-# variables:
-# - group: terraform-${{ parameters.Env }}
+variables:
+- group: terraform-${{ parameters.Env }}
 
 
 
