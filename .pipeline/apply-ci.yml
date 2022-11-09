@@ -12,6 +12,7 @@ trigger: none
 # - group: terraform-${{ parameters.Env }}
 
 
+
 stages:
   - stage: Apply
     jobs:
