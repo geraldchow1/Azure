@@ -1,5 +1,9 @@
 
-trigger: none
+trigger: 
+  branches:
+      include:
+        - main
+
 
 # parameters:
 #   - name: Env
