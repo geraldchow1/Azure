@@ -6,7 +6,7 @@ trigger:
         - main
   paths:
       include:
-        - use-modules
+        - app2
 
 
 parameters:
