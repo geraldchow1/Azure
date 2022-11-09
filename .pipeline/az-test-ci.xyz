@@ -1,0 +1,15 @@
+trigger: none
+
+pool:
+  vmImage: windows-latest
+
+steps:
+  - task: AzureCLI@2
+    displayName: test AZ connection
+    inputs:
+      azureSubscription: sp-adil-test # $(azureSubscription) 
+      scriptType: 'bash'  
+      scriptLocation: 'inlineScript'  
+      workingDirectory: $(Build.SourcesDirectory)
+      inlineScript: |
+        az account list -o table
