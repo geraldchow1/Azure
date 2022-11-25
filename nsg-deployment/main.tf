@@ -22,5 +22,8 @@ resource "azurerm_network_security_rule" "app_nsg_app_rule1" {
 
 
 
-
+resource "azurerm_subnet_network_security_group_association" "subnet_app" {
+     subnet_id = data.azurerm.subnet_id
+     network_security_group_id = azurerm_subnet_network_security_group.nsg_app.id
+}
 
