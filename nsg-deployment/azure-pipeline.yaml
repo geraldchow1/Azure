@@ -1,0 +1,17 @@
+name: $(BuildDefinitionName).$(DayofYear)$(Rev:.r)
+trigger:
+  batch: "true"
+  branches:
+  exclude:
+     - main
+     - '*'
+
+resources:
+   repositories
+      - repository: templates
+        type: git
+        ref: main
+        name: Demo-infa/pipeline-template
+
+        
+             
