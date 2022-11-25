@@ -1,17 +1,67 @@
-name: $(BuildDefinitionName).$(DayofYear)$(Rev:.r)
+name: $(BuildDefinitionName).$(DayOfYear)$(Rev:.r) 
 trigger:
   batch: "true"
   branches:
-  exclude:
-     - main
-     - '*'
+    exclude:
+      - main
+      - '*'
 
 resources:
-   repositories
-      - repository: templates
-        type: git
-        ref: main
-        name: Demo-infa/pipeline-template
+  repositories:
+    - repository: templates
+      type: git
+      ref: main
+      name: Saas-Networks/pipeline-templates
+#      endpoint: 
 
-        
-             
+parameters:
+  - name: TERRAFORM_VERSION
+    default: 1.1.7
+  - name: SubnetName
+    default:
+  - name: vnetName
+    default:
+  - name: ResourceGroupName
+    default:
+  - name: location
+    type: string 
+    default: 'francecentral'
+    values:
+     - francecentral
+     - francesouth
+  - name: spnName
+    type: string 
+    values:
+     - azdo-deploy-ESS-PROD-C20-100-pipeline-spn
+     - azdo-deploy-ESS-PROD-C00-100-pipeline-spn
+  - name: keyVault
+    type: string 
+    values:
+     - kv-ESS-PROD-C20-100
+variables:
+  TF_VAR_LOCATION: ${{ parameters.location }}
+  spnName: ${{ parameters.spnName }}
+  TF_VAR_KV: ${{ parameters.keyVault }}
+  TF_VAR_SUBNET_NAME: ${{ parameters.SubnetName }}
+  TF_VAR_RESOURCE_GROUP: ${{ parameters.ResourceGroupName }}
+  TF_VAR_VNET_NAME: ${{ parameters.vnetName }}
+
+stages:
+  - template: terraform/main.yaml@templates
+    parameters:
+      TERRAFORM_VERSION: "${{ parameters.TERRAFORM_VERSION }}"
+      # the 4 parameters below are just used for the pull request build
+      KEY_VAULT_NAME: $(TF_VAR_KV)
+      SERVICE_CONNECTION: $(spnName)
+      POOL: 
+        vmImage: windows-latest
+      # yaml object for the environments
+      ENVIRONMENTS:
+      - NAME: DPLY
+        KEY_VAULT_NAME: $(TF_VAR_KV)
+        SERVICE_CONNECTION: $(spnName)
+        AZDO_ENVIRONMENT_NAME: 'infrastructure-deploy'
+        POOL: 
+          vmImage: windows-latest
+        DEPENDS_ON: []
+
