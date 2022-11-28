@@ -3,6 +3,16 @@ trigger:
   branches:
       include:
         - main
+        - '*'
+
+resources:
+ repositories:
+   - repository: templates
+    type:git
+    ref:main
+    name: NSG-pipeline
+
+     
   paths:
       include:
         - app2
